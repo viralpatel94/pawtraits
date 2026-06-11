@@ -54,3 +54,15 @@ pipeline:
         repoName: pawtraits
         build: <+input>
   tags: {}
+  notificationRules:
+    - name: viral email
+      identifier: viral_email
+      pipelineEvents:
+        - type: PipelineSuccess
+      notificationMethod:
+        type: Email
+        spec:
+          userGroups: []
+          recipients:
+            - viralpatel94@gmail.com
+      enabled: true
