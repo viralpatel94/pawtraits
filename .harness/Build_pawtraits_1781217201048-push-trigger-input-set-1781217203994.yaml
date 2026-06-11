@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_pawtraits_1781217201048-push-trigger-input-set
+  identifier: Build_pawtraits_1781217201048pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_pawtraits_1781217201048
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
