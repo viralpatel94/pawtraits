@@ -48,20 +48,6 @@ pipeline:
                               mode: orchestration
                               config: default
                         - step:
-                            type: OsvScanner
-                            name: OsvScanner_1
-                            identifier: OsvScanner_1
-                            spec:
-                              target:
-                                detection: auto
-                                type: repository
-                              advanced:
-                                log:
-                                  level: info
-                                args: {}
-                              mode: orchestration
-                              config: default
-                        - step:
                             type: Gitleaks
                             name: Gitleaks_1
                             identifier: Gitleaks_1
