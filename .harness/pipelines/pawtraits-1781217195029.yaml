@@ -1,5 +1,5 @@
 pipeline:
-  name: Build pawtraits
+  name: pawtraits
   identifier: Build_pawtraits_1781217201048
   projectIdentifier: default_project
   orgIdentifier: default
@@ -113,3 +113,4 @@ pipeline:
         connectorRef: harnessgitconnector
         repoName: pawtraits
         build: <+input>
+  tags: {}
