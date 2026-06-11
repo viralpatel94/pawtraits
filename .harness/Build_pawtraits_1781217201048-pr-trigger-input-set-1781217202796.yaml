@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_pawtraits_1781217201048-pr-trigger-input-set
+  identifier: Build_pawtraits_1781217201048prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_pawtraits_1781217201048
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
