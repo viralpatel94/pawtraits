@@ -1,0 +1,72 @@
+# -------------------------------------------------------
+# Namespace
+# -------------------------------------------------------
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pawtraits
+
+---
+# -------------------------------------------------------
+# Deployment
+# -------------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pawtraits
+  namespace: pawtraits
+  labels:
+    app: pawtraits
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pawtraits
+  template:
+    metadata:
+      labels:
+        app: pawtraits
+    spec:
+      containers:
+        - name: pawtraits
+          image: viralpatel1994/pawtraits:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+---
+# -------------------------------------------------------
+# Service (NodePort for local minikube access)
+# -------------------------------------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: pawtraits-svc
+  namespace: pawtraits
+spec:
+  selector:
+    app: pawtraits
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+  type: NodePort
