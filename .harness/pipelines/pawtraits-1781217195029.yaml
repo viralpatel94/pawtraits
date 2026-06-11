@@ -92,6 +92,24 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          NODE_PORT=$(kubectl get svc pawtraits-svc -n pawtraits -o jsonpath='{.spec.ports[0].nodePort}')
+                          echo "Access your app at: http://localhost:$NODE_PORT"
+                          echo "If that doesn't work run: minikube service pawtraits-svc -n pawtraits --url"
+                    environmentVariables: []
+                    outputVariables: []
+                    includeInfraSelectors: true
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
