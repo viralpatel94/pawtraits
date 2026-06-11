@@ -32,6 +32,16 @@ pipeline:
                   template:
                     templateRef: paw_rolling
                     versionLabel: "1"
+              - step:
+                  type: Email
+                  name: viral email
+                  identifier: viral_email
+                  spec:
+                    to: viralpatel94@gmail.com
+                    cc: ""
+                    subject: build success
+                    body: great success
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
@@ -55,10 +65,10 @@ pipeline:
         build: <+input>
   tags: {}
   notificationRules:
-    - name: viral email
-      identifier: viral_email
+    - name: viral
+      identifier: viral
       pipelineEvents:
-        - type: PipelineSuccess
+        - type: PipelineFailed
       notificationMethod:
         type: Email
         spec:
