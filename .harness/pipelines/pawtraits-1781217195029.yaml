@@ -7,67 +7,9 @@ pipeline:
     - stage:
         name: Build
         identifier: Build
-        type: CI
-        spec:
-          cloneCodebase: true
-          execution:
-            steps:
-              - step:
-                  type: Run
-                  name: Echo Welcome Message
-                  identifier: Echo_Welcome_Message
-                  spec:
-                    shell: Sh
-                    command: echo "Welcome to Harness CI"
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: viral
-                    repo: viralpatel1994/pawtraits
-                    tags:
-                      - latest
-              - stepGroup:
-                  name: sec
-                  identifier: sec
-                  steps:
-                    - parallel:
-                        - step:
-                            type: Owasp
-                            name: Owasp_1
-                            identifier: Owasp_1
-                            spec:
-                              target:
-                                detection: auto
-                                type: repository
-                              advanced:
-                                log:
-                                  level: info
-                                args: {}
-                              mode: orchestration
-                              config: default
-                        - step:
-                            type: Gitleaks
-                            name: Gitleaks_1
-                            identifier: Gitleaks_1
-                            spec:
-                              target:
-                                detection: auto
-                                type: repository
-                              advanced:
-                                log:
-                                  level: info
-                                args: {}
-                              mode: orchestration
-                              config: default
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
-        description: ""
+        template:
+          templateRef: build_scan_push
+          versionLabel: "1"
     - stage:
         name: mini kube deploy
         identifier: mini_kube_deploy
