@@ -27,11 +27,12 @@ pipeline:
           execution:
             steps:
               - step:
-                  name: rolling deployment template
-                  identifier: rolling_deployment_template
-                  template:
-                    templateRef: paw_rolling
-                    versionLabel: "1"
+                  type: K8sBlueGreenStageScaleDown
+                  name: K8sBlueGreenStageScaleDown_1
+                  identifier: K8sBlueGreenStageScaleDown_1
+                  spec:
+                    deleteResources: false
+                  timeout: 10m
               - step:
                   type: Email
                   name: viral email
