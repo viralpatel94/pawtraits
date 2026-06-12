@@ -27,12 +27,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: K8sBlueGreenStageScaleDown
-                  name: K8sBlueGreenStageScaleDown_1
-                  identifier: K8sBlueGreenStageScaleDown_1
-                  spec:
-                    deleteResources: false
-                  timeout: 10m
+                  name: rollling
+                  identifier: rollling
+                  template:
+                    templateRef: paw_rolling
+                    versionLabel: "1"
               - step:
                   type: Email
                   name: viral email
